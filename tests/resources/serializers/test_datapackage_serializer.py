@@ -19,10 +19,14 @@ def test_data_package_serializer_minimal_record(full_record_to_dict):
     assert serialized_record == {
         "$schema": "https://datapackage.org/profiles/2.0/datapackage.json",
         "id": "https://handle.stage.datacite.org/10.1234/inveniordm.1234",
+        "name": "12345-abcde",
         "title": "InvenioRDM",
         "description": "<h1>A description</h1> <p>with HTML tags</p>",
         "version": "v1.0",
         "created": "2023-11-14T18:30:55.738898+00:00",
         "homepage": "https://127.0.0.1:5000/records/12345-abcde",
-        "keywords": ["Abdominal Injuries", "custom"],
+        "keywords": [
+            "Abdominal Injuries",
+            "custom",
+        ],
     }

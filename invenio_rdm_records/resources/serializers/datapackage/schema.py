@@ -18,6 +18,7 @@ class DataPackageSchema(Schema):
     profile = fields.Constant(PROFILE_URL, data_key="$schema")
 
     id = fields.Str(attribute="links.doi")
+    name = fields.Str(attribute="id")
     title = fields.Str(attribute="metadata.title")
     description = fields.Str(attribute="metadata.description")
     version = fields.Str(attribute="metadata.version")
