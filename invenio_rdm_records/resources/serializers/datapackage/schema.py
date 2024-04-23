@@ -25,6 +25,7 @@ class DataPackageSchema(Schema):
     created = fields.Str(attribute="created")
     homepage = fields.Str(attribute="links.self_html")
     keywords = fields.Method("get_keywords")
+    resources = fields.Method("get_resources")
 
     def get_keywords(self, obj):
         keywords = []
@@ -33,3 +34,18 @@ class DataPackageSchema(Schema):
             if keyword:
                 keywords.append(keyword)
         return keywords if keywords else missing
+
+    def get_resources(self, obj):
+        resources = []
+        for file in obj.get("files", {}).get("entries", {}).values():
+            resource = {}
+            resource["name"] = file.get("key")
+            resource["path"] = file.get("key")
+            resource["format"] = file.get("ext")
+            resource["mimetype"] = file.get("mimetype")
+            resource["bytes"] = file.get("size")
+            resource["hash"] = file.get("checksum")
+            resource = {k: v for k, v in resource.items() if v is not None}
+            if resource.get("name") and resource.get("path"):
+                resources.append(resource)
+        return resources

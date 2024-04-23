@@ -29,4 +29,14 @@ def test_data_package_serializer_minimal_record(full_record_to_dict):
             "Abdominal Injuries",
             "custom",
         ],
+        "resources": [
+            {
+                "name": "test.txt",
+                "path": "test.txt",
+                "format": "txt",
+                "mimetype": "text/plain",
+                "bytes": 9,
+                "hash": "md5:e795abeef2c38de2b064be9f6364ceae",
+            },
+        ],
     }
