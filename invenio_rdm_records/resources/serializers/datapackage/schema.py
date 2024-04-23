@@ -23,3 +23,12 @@ class DataPackageSchema(Schema):
     version = fields.Str(attribute="metadata.version")
     created = fields.Str(attribute="created")
     homepage = fields.Str(attribute="links.self_html")
+    keywords = fields.Method("get_keywords")
+
+    def get_keywords(self, obj):
+        keywords = []
+        for subject in obj.get("metadata", {}).get("subjects", []):
+            keyword = subject.get("subject")
+            if keyword:
+                keywords.append(keyword)
+        return keywords if keywords else missing

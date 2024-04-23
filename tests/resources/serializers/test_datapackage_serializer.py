@@ -24,4 +24,5 @@ def test_data_package_serializer_minimal_record(full_record_to_dict):
         "version": "v1.0",
         "created": "2023-11-14T18:30:55.738898+00:00",
         "homepage": "https://127.0.0.1:5000/records/12345-abcde",
+        "keywords": ["Abdominal Injuries", "custom"],
     }
