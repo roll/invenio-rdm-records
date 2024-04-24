@@ -7,13 +7,44 @@
 
 """Resources serializers tests."""
 
-import pytest
-
 from invenio_rdm_records.resources.serializers.datapackage import DataPackageSerializer
-from invenio_rdm_records.resources.serializers.errors import VocabularyItemNotFoundError
 
 
-def test_data_package_serializer_minimal_record(full_record_to_dict):
+def test_data_package_serializer_empty_record():
+    serializer = DataPackageSerializer()
+    serialized_record = serializer.dump_obj({})
+    assert serialized_record == {
+        "$schema": "https://datapackage.org/profiles/2.0/datapackage.json",
+        "resources": [],
+    }
+
+
+def test_data_package_serializer_minimal_record(minimal_record_to_dict):
+    serializer = DataPackageSerializer()
+    serialized_record = serializer.dump_obj(minimal_record_to_dict)
+    assert serialized_record == {
+        "$schema": "https://datapackage.org/profiles/2.0/datapackage.json",
+        "id": "https://handle.stage.datacite.org/10.1234/67890-fghij",
+        "name": "67890-fghij",
+        "title": "A Romans story",
+        "created": "2023-11-14T19:33:09.837080+00:00",
+        "homepage": "https://127.0.0.1:5000/records/67890-fghij",
+        "resources": [],
+        "contributors": [
+            {
+                "familyName": "Brown",
+                "givenName": "Troy",
+                "roles": ["creator"],
+            },
+            {
+                "roles": ["creator"],
+                "title": "Troy Inc.",
+            },
+        ],
+    }
+
+
+def test_data_package_serializer_full_record(full_record_to_dict):
     serializer = DataPackageSerializer()
     serialized_record = serializer.dump_obj(full_record_to_dict)
     assert serialized_record == {
