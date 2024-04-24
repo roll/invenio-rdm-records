@@ -26,6 +26,8 @@ class DataPackageSchema(Schema):
     homepage = fields.Str(attribute="links.self_html")
     keywords = fields.Method("get_keywords")
     resources = fields.Method("get_resources")
+    contributors = fields.Method("get_contributors")
+    licenses = fields.Method("get_licenses")
 
     def get_keywords(self, obj):
         keywords = []
@@ -49,3 +51,24 @@ class DataPackageSchema(Schema):
             if resource.get("name") and resource.get("path"):
                 resources.append(resource)
         return resources
+
+    def get_contributors(self, obj):
+        contributors = []
+        for type in ["creator", "contributor"]:
+            for item in obj.get("metadata", {}).get(f"{type}s", []):
+                entity = item.get("person_or_org", {})
+                parent = (item.get("affiliations") or [{}])[0]
+                contributor = {}
+                contributor["title"] = entity.get("name")
+                contributor["givenName"] = entity.get("given_name")
+                contributor["familyName"] = entity.get("family_name")
+                contributor["roles"] = [item.get("role", {}).get("id", type)]
+                contributor["organization"] = parent.get("name")
+                contributor = {k: v for k, v in contributor.items() if v is not None}
+                if contributor:
+                    contributors.append(contributor)
+        return contributors if contributors else missing
+
+    # TODO: implement (port to dplib as well)
+    def get_licenses(self, obj):
+        return missing

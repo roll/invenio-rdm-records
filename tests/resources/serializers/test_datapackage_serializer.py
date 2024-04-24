@@ -39,4 +39,32 @@ def test_data_package_serializer_minimal_record(full_record_to_dict):
                 "hash": "md5:e795abeef2c38de2b064be9f6364ceae",
             },
         ],
+        "contributors": [
+            {
+                "familyName": "Nielsen",
+                "givenName": "Lars Holm",
+                "organization": "CERN",
+                "roles": ["creator"],
+                "title": "Nielsen, Lars Holm",
+            },
+            {
+                "familyName": "Tom",
+                "givenName": "Blabin",
+                "roles": ["creator"],
+                "title": "Tom, Blabin",
+            },
+            {
+                "familyName": "Nielsen",
+                "givenName": "Lars Holm",
+                "organization": "CERN",
+                "roles": ["other"],
+                "title": "Nielsen, Lars Holm",
+            },
+            {
+                "familyName": "Dirk",
+                "givenName": "Dirkin",
+                "roles": ["other"],
+                "title": "Dirk, Dirkin",
+            },
+        ],
     }
