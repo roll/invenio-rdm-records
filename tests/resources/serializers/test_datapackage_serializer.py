@@ -63,7 +63,7 @@ def test_data_package_serializer_full_record(full_record_to_dict):
         "resources": [
             {
                 "name": "test.txt",
-                "path": "test.txt",
+                "path": "https://127.0.0.1:5000/records/12345-abcde/files/test.txt",
                 "format": "txt",
                 "mimetype": "text/plain",
                 "bytes": 9,

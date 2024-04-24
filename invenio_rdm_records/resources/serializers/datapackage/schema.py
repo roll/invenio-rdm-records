@@ -39,17 +39,19 @@ class DataPackageSchema(Schema):
 
     def get_resources(self, obj):
         resources = []
-        for file in obj.get("files", {}).get("entries", {}).values():
-            resource = {}
-            resource["name"] = file.get("key")
-            resource["path"] = file.get("key")
-            resource["format"] = file.get("ext")
-            resource["mimetype"] = file.get("mimetype")
-            resource["bytes"] = file.get("size")
-            resource["hash"] = file.get("checksum")
-            resource = {k: v for k, v in resource.items() if v is not None}
-            if resource.get("name") and resource.get("path"):
-                resources.append(resource)
+        basepath = obj.get("links", {}).get("self_html")
+        if basepath:
+            for file in obj.get("files", {}).get("entries", {}).values():
+                resource = {}
+                resource["name"] = file.get("key")
+                resource["path"] = f'{basepath}/files/{file.get("key")}'
+                resource["format"] = file.get("ext")
+                resource["mimetype"] = file.get("mimetype")
+                resource["bytes"] = file.get("size")
+                resource["hash"] = file.get("checksum")
+                resource = {k: v for k, v in resource.items() if v is not None}
+                if resource.get("name") and resource.get("path"):
+                    resources.append(resource)
         return resources
 
     def get_licenses(self, obj):

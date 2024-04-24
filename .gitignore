@@ -65,7 +65,6 @@ target/
 # Editors
 *.sublime-*
 .vscode/
-.vim/
 *.DS_Store
 
 # pipenv
