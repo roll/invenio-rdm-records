@@ -39,6 +39,13 @@ def test_data_package_serializer_minimal_record(full_record_to_dict):
                 "hash": "md5:e795abeef2c38de2b064be9f6364ceae",
             },
         ],
+        "licenses": [
+            {
+                "name": "cc-by-4.0",
+                "path": "https://creativecommons.org/licenses/by/4.0/legalcode",
+                "title": "Creative Commons Attribution 4.0 International",
+            },
+        ],
         "contributors": [
             {
                 "familyName": "Nielsen",
